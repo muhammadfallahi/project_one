@@ -14,11 +14,6 @@
         <input type="text" class="form-control" id="login" name="login">
       </div>
 
-    {{-- <div class="mb-3">
-        <label for="phone" class="form-label">Phone Number</label>
-        <input type="number" class="form-control" id="phone" name="phone">
-    </div> --}}
-
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
       <input type="password" class="form-control" id="password" name="password">
