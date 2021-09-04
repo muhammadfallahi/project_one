@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,7 @@ Route::get('login', [AuthController::class, 'showLogin'])
 
 Route::post('login', [AuthController::class, 'login'])
 ->name('auth.login');
+
+
+Route::get('posts', [PostController::class, 'index'])
+->name('post.index');
