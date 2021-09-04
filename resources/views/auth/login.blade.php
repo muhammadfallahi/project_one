@@ -2,6 +2,8 @@
 @section('title', 'login')
 @section('content')
 
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+
 @if(session('message'))
 <div class="alert alert-danger" role="alert">{{ session('message') }}</div>
 @endif
@@ -10,16 +12,16 @@
     @csrf
   
     <div class="mb-3">
+        <input type="text" id="login" name="login" class="form-control">
         <label for="login" class="form-label">Email or phone number</label>
-        <input type="text" class="form-control" id="login" name="login">
       </div>
 
     <div class="mb-3">
+      <input type="password" id="password" name="password" class="form-control">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password">
     </div>
 
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn">Login</button>
   </form>
 
     
