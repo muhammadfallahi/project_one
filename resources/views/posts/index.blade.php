@@ -2,12 +2,17 @@
 @section('title', 'posts index')
 @section('content')
     
-
+       {{-- use this for show post create message --}}
     @if (Session('title'))
     <div class="alert alert-success" role="alert">
          post {{Session('title')}} create successfully!
        </div>
-     @endif
+       {{-- use this for show post deleting message --}}
+     @elseif(session('message'))
+     <div class="alert alert-success" role="alert">
+         {{Session('message')}} 
+      </div>
+      @endif
 
      <table class="table">
         <thead>
@@ -20,7 +25,7 @@
         <tbody>
             @foreach ($posts as $post)
             <tr>
-               <td>{{$post->title}}</td>
+               <td><a href="{{route('post.show', $post)}}" class="link-info">{{$post->title}}</a></td>
                <td>{{Str::substr($post->description, 0, 20)}}</td>
                <td>{{$post->created_at}}</td>
             </tr>

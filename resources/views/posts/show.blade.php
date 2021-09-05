@@ -16,6 +16,16 @@
            <td>{{$post->title}}</td>
            <td>{{$post->description}}</td>
            <td>{{$post->created_at}}</td> 
+           <td><a href="{{ route('post.edit', $post) }}" class="btn btn-outline-info">Edit</a></td> 
+           <td>
+            <form method="post" action="{{ route('post.destroy', $post) }}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+            </form>
+            </td> 
+
+
         </tr>
      </tbody>
 </table>

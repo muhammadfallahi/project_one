@@ -48,6 +48,19 @@ Route::post('posts/store', [PostController::class, 'store'])
 Route::get('posts/{posts}', [PostController::class, 'show'])
 ->name('post.show');
 
+
+Route::get('posts/edit/{posts}', [PostController::class, 'edit'])
+->name('post.edit');
+
+
+Route::post('posts/update/{posts}', [PostController::class, 'update'])
+->name('post.update');
+
+
+Route::delete('posts/destroy/{posts}', [PostController::class, 'destroy'])
+->name('post.destroy');
+
+
 });
 
 

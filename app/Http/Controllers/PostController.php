@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -67,7 +68,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = post::findorfail($id);
+        return view('posts.edit')->with(compact('post'));
     }
 
     /**
@@ -79,7 +81,9 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::table('posts')->where('id', $id)->update(['title' => $request->title, 'description' => $request->description]);
+
+        return redirect()->route('post.index');
     }
 
     /**
@@ -90,6 +94,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $title = post::find($id)->title;
+        DB::table('posts')->where('id', $id)->delete();
+
+        return redirect()->route('post.index')->with('message',"post $title delete successfully!");
     }
 }
