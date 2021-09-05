@@ -43,6 +43,11 @@ Route::get('posts/create', [PostController::class, 'create'])
 
 Route::post('posts/store', [PostController::class, 'store'])
 ->name('post.store');
+
+
+Route::get('posts/{posts}', [PostController::class, 'show'])
+->name('post.show');
+
 });
 
 
