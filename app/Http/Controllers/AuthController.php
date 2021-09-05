@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -14,7 +18,9 @@ class AuthController extends Controller
 
     public function login(Request $request){
 
-        if(is_numeric($request->login)) {
+        // login with phone number
+
+        if(is_numeric($request->login)) {  
             $credentials = $request->validate([
                 'login' => ['required'],
                 'password' => ['required'],
@@ -29,7 +35,10 @@ class AuthController extends Controller
                 ->with('message', 'شماره موبایل یا پسورد وارد شده صحیح نیست.');
             }
         }else{
-            $credentials = $request->validate([
+
+            // login with email address
+
+            $credentials = $request->validate([  
                 'login' => ['required', 'email'],
                 'password' => ['required'],
             ]);
@@ -45,5 +54,36 @@ class AuthController extends Controller
             }
         }
 
+    }
+
+    public function logout(){
+
+       Auth::logout();
+
+       return redirect()->route('auth.showLogin');
+    }
+
+    public function showRegister(){
+
+        return view('auth.register');
+    }
+
+    public function register(Request $request){
+
+        $validator = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email','unique:users,email'],
+            'phone' => ['required', 'unique:users,phone_number'],
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        User::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'phone_number' => $request->get('phone'),
+            'password' => Hash::make($request->get('password'))
+        ]);
+
+        return redirect()->route('auth.showLogin')->with('message', 'register successfully! please login for access the account');
     }
 }

@@ -18,8 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
+// Route::group([
+//     'middleware' => 'auth',
+// ], function () {
+
+Route::middleware('auth')->group(function (){
 
 Route::get('users', [UserController::class, 'index'])
 ->name('user.index');
@@ -30,12 +35,33 @@ Route::get('users/create', [UserController::class, 'create'])
 Route::post('users/store', [UserController::class, 'store'])
 ->name('user.store');
 
+
+Route::get('posts', [PostController::class, 'index'])
+->name('post.index');
+
+
+Route::get('posts/create', [PostController::class, 'create'])
+->name('post.create');
+
+
+Route::post('posts/store', [PostController::class, 'store'])
+->name('post.store');
+});
+
+
 Route::get('login', [AuthController::class, 'showLogin'])
 ->name('auth.showLogin');
 
 Route::post('login', [AuthController::class, 'login'])
 ->name('auth.login');
 
+Route::post('logout', [AuthController::class, 'logout'])
+->name('auth.logout');
 
-Route::get('posts', [PostController::class, 'index'])
-->name('post.index');
+
+Route::get('register', [AuthController::class, 'showRegister'])
+->name('auth.showRegister');
+
+
+Route::post('register', [AuthController::class, 'register'])
+->name('auth.register');

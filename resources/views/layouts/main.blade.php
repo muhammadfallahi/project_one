@@ -10,6 +10,57 @@
     <title>@yield('title')</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page" href="{{route('home')}}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{route('user.index')}}">users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('user.create') ? 'active' : '' }}" href="{{route('user.create')}}">create user</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('post.index') ? 'active' : '' }}" href="{{route('post.index')}}">posts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('post.create') ? 'active' : '' }}" href="{{route('post.create')}}">create post</a>
+            </li>
+          </ul>
+          @if(!Auth::check())
+            <div class="me-2">
+              <form class="d-flex" method="get" action="{{ route('auth.showLogin') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-info">login</button>
+              </form>
+            </div>
+            <div class="me-5">
+              <form class="d-flex" method="get" action="{{ route('auth.showRegister') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-info">register</button>
+              </form>
+            </div>
+          @endif
+          @if(Auth::check())
+            <div class="me-5">
+              <form class="d-flex" method="post" action="{{ route('auth.logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-outline-info">logout</button>
+              </form>
+            </div>
+          @endif
+        </div>
+      </div>
+    </nav>
+    
+
 <div class="container">
     <div class="row">
         @yield('content')
