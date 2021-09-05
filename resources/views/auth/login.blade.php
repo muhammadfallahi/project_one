@@ -2,8 +2,6 @@
 @section('title', 'login')
 @section('content')
 
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
-
 {{-- use it for show validation errors--}}
 
 @if ($errors->any()) 
@@ -36,7 +34,7 @@
       <label for="password" class="form-label">Password</label>
     </div>
 
-    <button type="submit" class="btn">Login</button>
+    <button type="submit" class="btn btn-outline-info">Login</button>
   </form>
 
     

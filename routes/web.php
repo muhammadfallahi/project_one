@@ -20,9 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Route::group([
-//     'middleware' => 'auth',
-// ], function () {
 
 Route::middleware('auth')->group(function (){
 

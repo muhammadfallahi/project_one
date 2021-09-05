@@ -38,12 +38,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create([
+        $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'phone_number' => $request->get('phone'),
             'password' => Hash::make($request->get('password'))
         ]);
+
+        return redirect()->route('user.index')->with('name', $user->name);
     }
 
     /**

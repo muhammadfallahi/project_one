@@ -2,8 +2,6 @@
 @section('title', 'register')
 @section('content')
 
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
-
 {{-- use it for show validation errors--}}
 
 @if ($errors->any())
@@ -46,7 +44,7 @@
         <label for="password_confirmation" class="form-label">confirm Password</label>
       </div>
 
-    <button type="submit" class="btn">register</button>
+    <button type="submit" class="btn btn-outline-info">register</button>
   </form>
 
     

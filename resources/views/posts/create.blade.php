@@ -5,16 +5,16 @@
 <form method="POST" action="{{route('post.store')}}">
     @csrf
     <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" name="title">
+      <input type="text" id="title" name="title">
+      <label for="title">Title</label>
     </div>
 
     <div class="mb-3">
-        <label for="description" class="form-label">description</label><br>
-        <textarea name="description" id="description" rows="4"></textarea>
+      <textarea name="description" id="description" rows="4"></textarea>
+        <label for="description">description</label><br>
         </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-outline-info">Submit</button>
   </form>
 
 @endsection
