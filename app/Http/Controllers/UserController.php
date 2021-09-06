@@ -56,8 +56,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = user::findorfail($id);
+        return view('users.show')->with(compact('user'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
