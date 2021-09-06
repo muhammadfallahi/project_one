@@ -13,8 +13,14 @@
       <textarea name="description" id="description" rows="4" >{{$post->description}}</textarea>
         <label for="description">description</label><br>
         </div>
+        <script>  /* this script use for rich text editor */
+
+          CKEDITOR.replace('description');
+    
+        </script>
 
     <button type="submit" class="btn btn-outline-info">Submit</button>
   </form>
+
 
 @endsection
