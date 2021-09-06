@@ -14,9 +14,11 @@
     </div>
 @endif
 
-{{--this is for register successfull message--}}
+{{--this is for register successfull message and login incorrect input alert--}}
 @if(session('message'))
 <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+@elseif(session('alert'))
+<div class="alert alert-danger" role="alert">{{ session('alert') }}</div>
 @endif
 
 

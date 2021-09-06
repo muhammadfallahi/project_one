@@ -98,7 +98,7 @@ body {
 
 
 
-.row button {
+.row button :not(delete) {
   position: relative;
   display: inline-block;
   padding: 10px 20px;
@@ -113,7 +113,7 @@ body {
 
 }
 
-.row button:hover {
+.row button:hover :not(delete){
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;

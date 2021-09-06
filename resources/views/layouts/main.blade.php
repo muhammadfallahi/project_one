@@ -25,6 +25,7 @@
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page" href="{{route('home')}}">Home</a>
             </li>
+            @if(Auth::check())
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}" href="{{route('user.index')}}">users</a>
             </li>
@@ -37,6 +38,7 @@
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('post.create') ? 'active' : '' }}" href="{{route('post.create')}}">create post</a>
             </li>
+            @endif
           </ul>
           @if(!Auth::check())
             <div class="me-2">
