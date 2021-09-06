@@ -21,7 +21,7 @@
             <form method="post" action="{{ route('post.destroy', $post) }}">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
             </form>
             </td> 
 
