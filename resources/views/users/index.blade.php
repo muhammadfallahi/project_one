@@ -2,9 +2,9 @@
 @section('title', 'users index')
 @section('content')
 
-@if (Session('name'))
+@if (Session('message'))
 <div class="alert alert-success" role="alert">
-     user {{Session('name')}} create successfully!
+     {{Session('message')}} 
    </div>
  @endif
 

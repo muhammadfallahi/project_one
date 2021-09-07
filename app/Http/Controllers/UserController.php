@@ -39,14 +39,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'phone_number' => 'required|unique:users,phone_number|min:11|max:11', 
+            'password' => 'required'
+        ]);
+        
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'phone_number' => $request->get('phone'),
+            'phone_number' => $request->get('phone_number'),
             'password' => Hash::make($request->get('password'))
         ]);
 
-        return redirect()->route('user.index')->with('name', $user->name);
+        return redirect()
+        ->route('user.index')
+        ->with('message', "user $user->name create successfully!");
     }
 
     /**
@@ -86,10 +95,10 @@ class UserController extends Controller
 
         $validator = $request->validate([
             'name' => 'required',
-            'email' => 'unique:users,email,' . $id, /* check email is unique except this $id */
-            'phone_number' => 'required', 
+            'email' => 'required|unique:users,email,' . $id, /* check email is unique except this $id */
+            'phone_number' => 'required|min:11|max:11', 
             'current_password' => 'current_password',
-            'password' => ['confirmed']
+            'password' => 'confirmed'
         ]);
         /* use this for that when we dont want change password put the exist password in database  */
         if ($request->password) {
@@ -107,7 +116,9 @@ class UserController extends Controller
             'password' => Hash::make($password)
         ]);
 
-        return redirect()->route('user.index');
+        return redirect()
+        ->route('user.index')
+        ->with('message', "user $request->name update successfully!");
     }
 
     /**

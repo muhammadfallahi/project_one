@@ -1,6 +1,16 @@
 @extends('layouts.main')
 @section('title', 'create user')
 @section('content')
+
+@if ($errors->any()) 
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
     
 <form method="POST" action="{{route('user.store')}}">
     @csrf
@@ -15,8 +25,8 @@
       </div>
 
     <div class="mb-3">
-      <input type="number" id="phone" name="phone">
-      <label for="phone">Phone Number</label>
+      <input type="number" id="phone_number" name="phone_number">
+      <label for="phone_number">Phone Number</label>
     </div>
 
     <div class="mb-3">
