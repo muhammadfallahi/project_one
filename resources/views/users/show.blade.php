@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'user post')
+@section('title', 'show user')
 @section('content')
 <table class="table">
     <thead>
@@ -19,6 +19,14 @@
            <td>{{$user->email}}</td>
            <td>{{$user->phone_number}}</td>
            <td>{{$user->created_at}}</td> 
+           <td><a href="{{ route('user.edit', $user) }}" class="btn btn-outline-info">Edit</a></td> 
+           {{-- <td>
+            <form method="post" action="{{ route('user.destroy', $user) }}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-outline-danger" id="delete" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+            </form>
+            </td>  --}}
         </tr>
      </tbody>
 </table>

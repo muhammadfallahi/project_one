@@ -35,6 +35,12 @@ Route::post('users/store', [UserController::class, 'store'])
 Route::get('users/{users}', [UserController::class, 'show'])
 ->name('user.show');
 
+Route::get('users/edit/{users}', [UserController::class, 'edit'])
+->name('user.edit');
+
+Route::post('users/update/{users}', [UserController::class, 'update'])
+->name('user.update');
+
 
 Route::get('posts', [PostController::class, 'index'])
 ->name('post.index');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -69,7 +70,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = user::findorfail($id);
+        return view('users.edit')->with(compact('user'));
     }
 
     /**
@@ -81,7 +83,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $validator = $request->validate([
+            'name' => 'required',
+            'email' => 'unique:users,email,' . $id, /* check email is unique except this $id */
+            'phone_number' => 'required', 
+            'current_password' => 'current_password',
+            'password' => ['confirmed']
+        ]);
+        /* use this for that when we dont want change password put the exist password in database  */
+        if ($request->password) {
+            $password = $request->password;
+        }else{
+            $password = $validator['current_password'];
+        }
+        
+        DB::table('users')
+        ->where('id', $id)
+        ->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'password' => Hash::make($password)
+        ]);
+
+        return redirect()->route('user.index');
     }
 
     /**
