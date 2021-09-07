@@ -20,13 +20,13 @@
            <td>{{$user->phone_number}}</td>
            <td>{{$user->created_at}}</td> 
            <td><a href="{{ route('user.edit', $user) }}" class="btn btn-outline-info">Edit</a></td> 
-           {{-- <td>
+           <td>
             <form method="post" action="{{ route('user.destroy', $user) }}">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-outline-danger" id="delete" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
             </form>
-            </td>  --}}
+            </td> 
         </tr>
      </tbody>
 </table>

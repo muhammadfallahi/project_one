@@ -102,6 +102,8 @@ class PostController extends Controller
         $title = post::find($id)->title;
         DB::table('posts')->where('id', $id)->delete();
 
-        return redirect()->route('post.index')->with('message',"post $title delete successfully!");
+        return redirect()
+        ->route('post.index')
+        ->with('message',"post $title delete successfully!");
     }
 }
