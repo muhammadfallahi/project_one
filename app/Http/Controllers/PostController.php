@@ -93,13 +93,19 @@ class PostController extends Controller
             'description' => 'required',
         ]);
 
-        DB::table('posts')
-        ->where('id', $id)
-        ->update([
-            'title' => $request->title, 
-            'description' => $request->description
-        ]);
+        // DB::table('posts')
+        // ->where('id', $id)
+        // ->update([
+        //     'title' => $request->title, 
+        //     'description' => $request->description,
+        // ]);
 
+        $update = post::find($id);
+        $update->title = "$request->title";
+        $update->description = "$request->description";
+        $update->save(); /* using save() method update the pdated-at automatically */
+
+        
         return redirect()
         ->route('post.index')
         ->with('message', "post $request->title update successfully!");
