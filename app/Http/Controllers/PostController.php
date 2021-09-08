@@ -39,13 +39,20 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
         $post = Post::create([
             'user_id' =>Auth::user()->id,
             'title' => $request->get('title'),
             'description' => $request->get('description')
         ]);
 
-        return redirect()->route('post.index')->with('title',$post->title);
+        return redirect()
+        ->route('post.index')
+        ->with('message', "post $request->title create successfully!");
     }
 
     /**
@@ -81,6 +88,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
         DB::table('posts')
         ->where('id', $id)
         ->update([
@@ -88,7 +100,9 @@ class PostController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('post.index');
+        return redirect()
+        ->route('post.index')
+        ->with('message', "post $request->title update successfully!");
     }
 
     /**

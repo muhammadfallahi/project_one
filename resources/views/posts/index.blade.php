@@ -2,13 +2,8 @@
 @section('title', 'posts index')
 @section('content')
     
-       {{-- use this for show post create message --}}
-    @if (Session('title'))
-    <div class="alert alert-success" role="alert">
-         post {{Session('title')}} create successfully!
-       </div>
        {{-- use this for show post deleting message --}}
-     @elseif(session('message'))
+     @if(session('message'))
      <div class="alert alert-success" role="alert">
          {{Session('message')}} 
       </div>
