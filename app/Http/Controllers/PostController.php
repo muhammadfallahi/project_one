@@ -121,10 +121,23 @@ class PostController extends Controller
     public function destroy($id)
     {
         $title = post::find($id)->title;
-        DB::table('posts')->where('id', $id)->delete();
+        // DB::table('posts')->where('id', $id)->delete();
+        post::find($id)->delete();
 
         return redirect()
         ->route('post.index')
         ->with('message',"post $title delete successfully!");
+    }
+
+    public function forceDelete($id)
+    {
+        $title = post::find($id)->title;
+        
+        post::find($id)->forcedelete();
+
+        return redirect()
+        ->route('post.index')
+        ->with('message',"post $title forceDelete successfully!");
+
     }
 }

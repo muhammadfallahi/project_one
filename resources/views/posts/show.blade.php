@@ -28,6 +28,13 @@
                 <button class="btn btn-outline-danger" id="delete" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
             </form>
             </td> 
+            <td>
+              <form method="post" action="{{ route('post.forceDelete', $post) }}">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-outline-danger" id="delete" type="submit" onclick="return confirm('Are you sure?')">forceDelete</button>
+              </form>
+              </td> 
 
 
         </tr>

@@ -71,6 +71,9 @@ Route::post('posts/update/{posts}', [PostController::class, 'update'])
 Route::delete('posts/destroy/{posts}', [PostController::class, 'destroy'])
 ->name('post.destroy');
 
+Route::delete('posts/forceDelete/{posts}', [PostController::class, 'forceDelete'])
+->name('post.forceDelete');
+
 
 });
 
