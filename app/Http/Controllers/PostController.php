@@ -41,13 +41,14 @@ class PostController extends Controller
     {
         $validator = $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'content' => 'required',
         ]);
 
         $post = Post::create([
             'user_id' =>Auth::user()->id,
             'title' => $request->get('title'),
-            'description' => $request->get('description')
+            'content' => $request->get('content'),
+            'author' => Auth::user()->name
         ]);
 
         return redirect()
@@ -90,20 +91,20 @@ class PostController extends Controller
     {
         $validator = $request->validate([
             'title' => 'required',
-            'description' => 'required',
+            'content' => 'required',
         ]);
 
         // DB::table('posts')
         // ->where('id', $id)
         // ->update([
         //     'title' => $request->title, 
-        //     'description' => $request->description,
+        //     'content' => $request->content,
         // ]);
 
         $update = post::find($id);
         $update->title = "$request->title";
-        $update->description = "$request->description";
-        $update->save(); /* using save() method update the pdated-at automatically */
+        $update->content = "$request->content";
+        $update->save(); /* using save() method update the updated-at automatically */
 
         
         return redirect()

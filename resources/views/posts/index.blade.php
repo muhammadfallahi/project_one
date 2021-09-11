@@ -13,7 +13,7 @@
         <thead>
           <tr>
             <th scope="col">title</th>
-            <th scope="col">Description</th>
+            <th scope="col">content</th>
             <th scope="col">create_at</th>
           </tr>
         </thead>
@@ -21,7 +21,7 @@
             @foreach ($posts as $post)
             <tr>
                <td><a href="{{route('post.show', $post)}}" class="link-info">{{$post->title}}</a></td>
-               <td>{{Str::substr($post->description, 0, 20)}}</td>
+               <td>{!!Str::substr($post->content, 0, 20)!!}</td>
                <td>{{$post->created_at}}</td>
             </tr>
             @endforeach

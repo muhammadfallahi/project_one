@@ -6,16 +6,22 @@ body {
   margin:0;
   padding:0;
   font-family: sans-serif;
-  background: linear-gradient(#1d2c47, #243b55);
+  /* background: linear-gradient(#1d2c47, #243b55); */
+  background: linear-gradient(#1d2c47, #1d2c47);
+
+}
+
+.container {
+  margin-top: 20px;
 }
 
 .row {
-  position: absolute;
+  position:relative;
   top: 50%;
-  left: 50%;
+  /* left: 50%; */
   /* width: 600px; */
   padding: 40px;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
   background: rgba(0,0,0,.5);
   box-sizing: border-box;
   box-shadow: 0 15px 25px rgba(0,0,0,.6);
@@ -96,8 +102,6 @@ body {
 }
 
 
-
-
 .row button :not(delete) {
   position: relative;
   display: inline-block;
@@ -113,7 +117,7 @@ body {
 
 }
 
-.row button:hover :not(delete){
+.row button:hover :not(delete) {
   background: #03e9f4;
   color: #fff;
   border-radius: 5px;

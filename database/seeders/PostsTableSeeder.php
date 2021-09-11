@@ -18,7 +18,7 @@ class PostsTableSeeder extends Seeder
     {
         DB::table('posts')->insert([
             'title' => str::random(10),
-            'description' => str::random(25),
+            'content' => str::random(25),
             'user_id' => '1'
 
         ]);

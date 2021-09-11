@@ -20,12 +20,12 @@
     </div>
 
     <div class="mb-3">
-      <textarea name="description" id="description" rows="4"></textarea>
-        <label for="description">description</label><br>
+      <textarea name="content" id="content" rows="4"></textarea>
+        <label for="content">content</label><br>
         </div>
         <script>  /* this script use for rich text editor */
 
-          CKEDITOR.replace('description');
+          CKEDITOR.replace('content');
     
         </script>
 
