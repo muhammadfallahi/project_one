@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        return view('posts.create',compact('tags'));
     }
 
     /**
@@ -42,6 +44,8 @@ class PostController extends Controller
         $validator = $request->validate([
             'title' => 'required',
             'content' => 'required',
+            'tags_id'=> 'required|array',
+            "tags_id.*" => "required|exists:App\Models\Tag,id"
         ]);
 
         $post = Post::create([
@@ -50,6 +54,9 @@ class PostController extends Controller
             'content' => $request->get('content'),
             'author' => Auth::user()->name
         ]);
+
+        $post->tags()->sync($validator['tags_id']);
+
 
         return redirect()
         ->route('post.index')
@@ -65,7 +72,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = post::findorfail($id);
-        return view('posts.show')->with(compact('post'));
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -77,7 +84,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = post::findorfail($id);
-        return view('posts.edit')->with(compact('post'));
+        return view('posts.edit',compact('post'));
     }
 
     /**

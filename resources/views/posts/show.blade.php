@@ -9,6 +9,7 @@
         <th scope="col">slug</th>
         <th scope="col">author</th>
         <th scope="col">content</th>
+        <th scope="col">tags</th>
         <th scope="col">create_at</th>
       </tr>
     </thead>
@@ -19,6 +20,11 @@
            <td>{{$post->slug}}</td>
            <td>{{$post->author}}</td>
            <td>{!!$post->content!!}</td>
+           <td>
+           @foreach ($post->tags as $tag)
+           {{$tag->title}}
+           @endforeach
+          </td>
            <td>{{$post->created_at}}</td> 
            <td><a href="{{ route('post.edit', $post) }}" class="btn btn-outline-info">Edit</a></td> 
            <td>

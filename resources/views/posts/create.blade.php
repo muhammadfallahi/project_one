@@ -29,7 +29,14 @@
     
         </script>
 
-    <button type="submit" class="btn btn-outline-info">Submit</button>
+<select class="form-select" name="tags_id[]" multiple>
+  <option selected disabled>seleg tag</option>
+  @foreach ($tags as $tag)
+  <option value={{$tag->id}}>{{$tag->title}}</option>
+  @endforeach
+</select>
+
+    <button type="submit" class="btn btn-outline-info mt-3">Submit</button>
   </form>
 
 @endsection

@@ -38,6 +38,12 @@
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIs('post.create') ? 'active' : '' }}" href="{{route('post.create')}}">create post</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('tags.index') ? 'active' : '' }}" href="{{route('tags.index')}}">tags</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIs('tags.create') ? 'active' : '' }}" href="{{route('tags.create')}}">create tag</a>
+            </li>
             @endif
           </ul>
           @if(!Auth::check())

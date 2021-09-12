@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +74,8 @@ Route::delete('posts/destroy/{posts}', [PostController::class, 'destroy'])
 
 Route::delete('posts/forceDelete/{posts}', [PostController::class, 'forceDelete'])
 ->name('post.forceDelete');
+
+Route::resource('tags', TagController::class);
 
 
 });
