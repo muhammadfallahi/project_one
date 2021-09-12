@@ -30,9 +30,16 @@
         </script>
 
 <select class="form-select" name="tags_id[]" multiple>
-  <option selected disabled>seleg tag</option>
+  <option selected disabled>select tag</option>
   @foreach ($tags as $tag)
   <option value={{$tag->id}}>{{$tag->title}}</option>
+  @endforeach
+</select>
+
+<select class="form-select mt-5" name="categories_id[]" multiple>
+  <option selected disabled>select category</option>
+  @foreach ($categories as $category)
+  <option value={{$category->id}}>{{$category->title}}</option>
   @endforeach
 </select>
 

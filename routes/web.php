@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -76,6 +77,9 @@ Route::delete('posts/forceDelete/{posts}', [PostController::class, 'forceDelete'
 ->name('post.forceDelete');
 
 Route::resource('tags', TagController::class);
+
+Route::resource('categories', CategoryController::class);
+
 
 
 });

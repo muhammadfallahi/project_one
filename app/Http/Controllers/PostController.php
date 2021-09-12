@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('posts.create',compact('tags'));
+        $categories = Category::all();
+        return view('posts.create',compact('tags', 'categories'));
     }
 
     /**
@@ -45,7 +47,9 @@ class PostController extends Controller
             'title' => 'required',
             'content' => 'required',
             'tags_id'=> 'required|array',
-            "tags_id.*" => "required|exists:App\Models\Tag,id"
+            "tags_id.*" => "required|exists:App\Models\Tag,id",
+            'categories_id'=> 'required|array',
+            "categories_id.*" => "required|exists:App\Models\Category,id"
         ]);
 
         $post = Post::create([
@@ -56,6 +60,8 @@ class PostController extends Controller
         ]);
 
         $post->tags()->sync($validator['tags_id']);
+        $post->categories()->sync($validator['categories_id']);
+
 
 
         return redirect()
