@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -39,13 +41,24 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'title' => 'required|unique:categories'
+            'title' => 'required|unique:categories',
+            'image' => 'required',
         ]);
 
         $category = Category::create([
             'title' => $request->get('title'),
             'slug' => Str::of("$request->title")->slug('-')
         ]);
+        $name = $request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->storeAs('/images',$name);
+        $image = Image::create([
+            'title' => $name,
+            'alt' => $request->alt ?? $name,
+            'path' => $path,
+            'imageable_id' => $category->id,
+            'imageable_type' =>'app\category'
+        ]);
+
 
         return redirect()
                ->route('categories.index')
