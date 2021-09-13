@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Carbon\Factory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,11 +17,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'name' => Str::random(10),
-            'email' => Str::random(10).'@gmail.com',
-            'phone_number' => '09123456789',
-            'password' => Hash::make('password')
-        ]);
+       User::Factory()->times(20)->create();
+
     }
 }
