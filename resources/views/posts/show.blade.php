@@ -34,19 +34,18 @@
             @endforeach
            </td>
            <td>{{$post->created_at}}</td>
-           @foreach ($image as $images)
-           <td><img src="{{asset("storage/$images->path")}}" width="50" height="50" alt="{{$images->alt}}"></td> 
-           @endforeach
-           <td><a href="{{ route('post.edit', $post) }}" class="btn btn-outline-info">Edit</a></td> 
            <td>
-            <form method="post" action="{{ route('post.destroy', $post) }}">
+           @foreach ($image as $images)
+           <img src="{{asset("storage/$images->path")}}" width="50" height="50" alt="{{$images->alt}}">
+           @endforeach
+          </td> 
+           <td><a href="{{ route('post.edit', $post) }}" class="btn btn-outline-info">Edit</a>
+            <form method="post" action="{{ route('post.destroy', $post) }}"><br>
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-outline-danger" id="delete" type="submit" onclick="return confirm('Are you sure?')">Delete</button>
-            </form>
-            </td> 
-            <td>
-              <form method="post" action="{{ route('post.forceDelete', $post) }}">
+            </form>       
+              <form method="post" action="{{ route('post.forceDelete', $post) }}"><br>
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-outline-danger" id="delete" type="submit" onclick="return confirm('Are you sure?')">forceDelete</button>
