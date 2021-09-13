@@ -17,4 +17,8 @@ class Category extends Model
         return $this->belongsToMany(post::class);
     }
 
+    public function image(){
+
+        return $this->morphOne(image::class, 'imageable');
+    }
 }

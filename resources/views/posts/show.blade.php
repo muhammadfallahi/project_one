@@ -12,6 +12,8 @@
         <th scope="col">tags</th>
         <th scope="col">categories</th>
         <th scope="col">create_at</th>
+        <th scope="col">image</th>
+
       </tr>
     </thead>
     <tbody>
@@ -31,7 +33,10 @@
             {{$category->title}}
             @endforeach
            </td>
-           <td>{{$post->created_at}}</td> 
+           <td>{{$post->created_at}}</td>
+           @foreach ($image as $images)
+           <td><img src="{{asset("storage/$images->path")}}" width="50" height="50" alt="{{$images->alt}}"></td> 
+           @endforeach
            <td><a href="{{ route('post.edit', $post) }}" class="btn btn-outline-info">Edit</a></td> 
            <td>
             <form method="post" action="{{ route('post.destroy', $post) }}">

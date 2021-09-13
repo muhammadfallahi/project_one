@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -22,7 +23,6 @@ class PostController extends Controller
 
         return view('posts.index', compact('posts'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +49,8 @@ class PostController extends Controller
             'tags_id'=> 'required|array',
             "tags_id.*" => "required|exists:App\Models\Tag,id",
             'categories_id'=> 'required|array',
-            "categories_id.*" => "required|exists:App\Models\Category,id"
+            "categories_id.*" => "required|exists:App\Models\Category,id",
+            'image' => 'required',
         ]);
 
         $post = Post::create([
@@ -57,6 +58,16 @@ class PostController extends Controller
             'title' => $request->get('title'),
             'content' => $request->get('content'),
             'author' => Auth::user()->name
+        ]);
+        
+        $name = $request->file('image')->getClientOriginalName();
+        $path = $request->file('image')->storeAs('/images',$name);
+        $image = Image::create([
+            'title' => $name,
+            'alt' => $request->alt ?? $name,
+            'path' => $path,
+            'imageable_id' => $post->id,
+            'imageable_type' =>'app\post'
         ]);
 
         $post->tags()->sync($validator['tags_id']);
@@ -78,7 +89,8 @@ class PostController extends Controller
     public function show($id)
     {
         $post = post::findorfail($id);
-        return view('posts.show', compact('post'));
+        $image = DB::table('images')->where('imageable_id', $id)->get();
+        return view('posts.show', compact('post','image'));
     }
 
     /**

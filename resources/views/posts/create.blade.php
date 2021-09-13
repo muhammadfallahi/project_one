@@ -12,7 +12,7 @@
 </div>
 @endif
     
-<form method="POST" action="{{route('post.store')}}">
+<form method="POST" action="{{route('post.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
       <input type="text" id="title" name="title">
@@ -41,7 +41,18 @@
   @foreach ($categories as $category)
   <option value={{$category->id}}>{{$category->title}}</option>
   @endforeach
-</select>
+</select><br><br>
+
+
+<div class="mb-3">
+  <input type="text" id="alt" name="alt">
+  <label for="alt">description for image</label>
+</div>
+<div class="mb-3">
+  <input type="file" name="image">
+  <label for="image">select image</label>
+</div>
+
 
     <button type="submit" class="btn btn-outline-info mt-3">Submit</button>
   </form>
